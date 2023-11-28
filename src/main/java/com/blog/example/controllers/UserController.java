@@ -1,7 +1,7 @@
 package com.blog.example.controllers;
 
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +43,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<ApiResponse> deleteUser(@PathVariable Integer userId)
     {
-    	this.deleteUser(userId);
+    	this.userService.deleteUser(userId);
     	return new ResponseEntity(new ApiResponse("user deleted successfully",true) ,HttpStatus.OK);
     }
     
