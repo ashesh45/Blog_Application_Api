@@ -1,4 +1,4 @@
-package com.blog.example.services;
+package com.blog.example.services.Impl;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.blog.example.entities.User;
 import com.blog.example.payloads.UserDto;
 import com.blog.example.repositories.UserRepo;
+import com.blog.example.services.UserService;
 import com.blog.example.exceptions.*;
 
 @Service
 public class UserServiceImpl implements UserService {
+
 	
 	@Autowired
 	private UserRepo userRepo;
@@ -89,5 +91,7 @@ public class UserServiceImpl implements UserService {
 		// userDto.setAbout(user.getAbout());
 		 return userDto;
 	}
+
+	
 
 }
