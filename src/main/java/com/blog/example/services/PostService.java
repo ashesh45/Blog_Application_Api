@@ -8,7 +8,7 @@ import com.blog.example.payloads.PostDto;
 public interface PostService {
 	
 	//create
-	Post createPost(PostDto postDto);
+	PostDto createPost(PostDto postDto,Integer userId, Integer CategoryId);
 	
 	//update
 	Post updatePost(PostDto postDto, Integer postId);
