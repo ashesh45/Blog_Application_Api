@@ -8,27 +8,27 @@ import com.blog.example.payloads.PostDto;
 public interface PostService {
 	
 	//create
-	PostDto createPost(PostDto postDto,Integer userId, Integer CategoryId);
+	PostDto createPost(PostDto postDto,Integer userId, Integer categoryId);
 	
 	//update
-	Post updatePost(PostDto postDto, Integer postId);
+	PostDto updatePost(PostDto postDto, Integer postId);
 	
 	//delete
-	Post deletePost(Integer postId);
+	void deletePost(Integer postId);
 	
 	//get all posts
 	List<Post> getAllPost();
 	
 	//get single post
-	Post getPostById(Integer postId);
+	PostDto getPostById(Integer postId);
 	
 	//get all post by category
-	List<Post> getPostByCategory(Integer category);
+	List<PostDto> getPostByCategory(Integer categoryId);
 	
 	//get all post by user
-	List<Post> getPostByUser(Integer UserId);
+	List<PostDto> getPostByUser(Integer userId);
 	
 	//searching post
-	List<Post> searchPosts(String keyword);
+	List<PostDto> searchPosts(String keyword);
 	
 }

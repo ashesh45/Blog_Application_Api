@@ -26,10 +26,10 @@ public class PostController {
 	public ResponseEntity<PostDto> createPost(
 			                                  @RequestBody PostDto postDto,
 			                                  @PathVariable Integer userId,
-			                                  @PathVariable Integer category
+			                                  @PathVariable Integer categoryId
                                                )
 	{
-		PostDto createPost = this.postService.createPost(postDto, userId, category);
+		PostDto createPost = this.postService.createPost(postDto, userId, categoryId);
 		return new ResponseEntity<PostDto>(createPost,HttpStatus.CREATED);
 
 }
