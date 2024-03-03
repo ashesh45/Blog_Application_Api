@@ -91,7 +91,7 @@ public PostDto getPostById(Integer postId) {
 }
 
 @Override
-public List<PostDto> getPostByCategory(Integer categoryId) {
+public List<PostDto> getPostsByCategory(Integer categoryId) {
 	Category category = this.categoryRepo.findById(categoryId)
             .orElseThrow(() -> new ResourceNotFoundException("Category", "category id", categoryId));
     List<Post> posts = this.postRepo.findByCategory(category);
@@ -103,17 +103,23 @@ public List<PostDto> getPostByCategory(Integer categoryId) {
 }
 
 @Override
-public List<PostDto> getPostByUser(Integer userId) {
-	// TODO Auto-generated method stub
-	return null;
+public List<PostDto> getPostsByUser(Integer userId) {
+	 User user = this.userRepo.findById(userId)
+             .orElseThrow(() -> new ResourceNotFoundException("User ", "userId ", userId));
+     List<Post> posts = this.postRepo.findByUser(user);
+
+     List<PostDto> postDtos = posts.stream().map((post) -> this.modelmapper.map(post, PostDto.class))
+             .collect(Collectors.toList());
+
+     return postDtos;
 }
 
 @Override
 public List<PostDto> searchPosts(String keyword) {
-	// TODO Auto-generated method stub
-	return null;
+	   List<Post> posts = this.postRepo.searchByTitle("%" + keyword + "%");
+       List<PostDto> postDtos = posts.stream().map((post) -> this.modelmapper.map(post, PostDto.class)).collect(Collectors.toList());
+       return postDtos;
 }
-
 
 }	
 
