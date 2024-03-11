@@ -78,9 +78,11 @@ public void deletePost(Integer postId) {
 }
 
 @Override
-public List<Post> getAllPost() {
-	// TODO Auto-generated method stub
-	return null;
+public List<PostDto> getAllPost() {
+	 List<Post> allPosts = this.postRepo.findAll();
+	 List<PostDto> postDtos = allPosts.stream().map((post) -> this.modelmapper.map(post, PostDto.class))
+             .collect(Collectors.toList());
+	return postDtos;
 }
 
 @Override
