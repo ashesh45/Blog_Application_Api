@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.blog.example.entities.Category;
 import com.blog.example.entities.Post;
@@ -78,11 +81,24 @@ public void deletePost(Integer postId) {
 }
 
 @Override
-public List<PostDto> getAllPost() {
-	 List<Post> allPosts = this.postRepo.findAll();
+public PostResponse getAllPost(Integer pageNumber,Integer pageSize) {
+	 
+	 Pageable p=PageRequest.of(pageNumber,pageSize);
+	
+	  Page<Post> pagePost = this.postRepo.findAll(p);
+	  List<Post> allPosts = pagePost.getContent();
 	 List<PostDto> postDtos = allPosts.stream().map((post) -> this.modelmapper.map(post, PostDto.class))
              .collect(Collectors.toList());
-	return postDtos;
+	 PostResponse postResponse= new PostResponse();
+	 
+	 postResponse.setContent(postDtos);
+	 postResponse.setPageNumber(pagePost.getNumber());
+	 postResponse.setPageSize(0);
+	 postResponse.setTotalElements(pagePost.getTotalElements());
+	 postResponse.setTotalPages(pagePost.getTotalPages());
+	 postResponse.setLastPage(pagePost.isLast());
+	 
+	return postResponse;
 }
 
 @Override

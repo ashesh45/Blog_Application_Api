@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.blog.example.payloads.ApiResponse;
 import com.blog.example.payloads.PostDto;
+import com.blog.example.payloads.PostResponse;
 import com.blog.example.services.PostService;
 
 
@@ -100,10 +101,13 @@ public class PostController {
 		
 		//get all post
 		@GetMapping("/posts")
-		public ResponseEntity<List<PostDto>> getAllPost()
+		public ResponseEntity<PostResponse> getAllPost(
+				@RequestParam(value = "pageNumber",defaultValue = "0", required=false) Integer pageNumber,
+				@RequestParam(value = "pageSize",defaultValue = "10", required=false) Integer pageSize
+				)
 		{
-			List<PostDto> allPost = this.postService.getAllPost();
-			return new ResponseEntity<List<PostDto>>(allPost,HttpStatus.OK);
+			PostResponse postResponse = this.postService.getAllPost(pageNumber,pageSize);
+			return new ResponseEntity<PostResponse>(postResponse,HttpStatus.OK);
 		}
 		
 	
