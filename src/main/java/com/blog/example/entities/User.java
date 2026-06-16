@@ -28,15 +28,16 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-    @Column(name="user_name", nullable=false, length=100)
-	private String name;
+ 
+	private String username;
 	
-
 	private String email;
 
 	private String password;
 
 	private String about;
+	
+	private String role;
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Post> posts = new ArrayList<>(); 

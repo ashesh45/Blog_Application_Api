@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.blog.example.payloads.ApiResponse;
 import com.blog.example.payloads.UserDto;
 import com.blog.example.services.UserService;
-import com.bway.springdemo.model.User;
+
 
 import jakarta.servlet.http.HttpSession;
 
