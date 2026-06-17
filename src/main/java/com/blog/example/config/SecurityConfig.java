@@ -38,7 +38,10 @@ public class SecurityConfig {
             .cors(cors -> cors.disable())
             .formLogin(form -> form.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/auth/**").permitAll()       
+                .requestMatchers("/auth/**").permitAll() 
+                 .requestMatchers("/api/users/**").hasRole("ADMIN")
+                 .requestMatchers("/api/p/**").hasAnyRole("ADMIN","USER")
+                 .requestMatchers("/api/categories/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .exceptionHandling(ex ->
